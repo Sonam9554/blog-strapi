@@ -22,10 +22,10 @@ const BlogDetail = () => {
   }
 
   // Get cover image URL correctly
- const coverUrl =
-  blog.coverImage?.[0]?.url
-    ? blog.coverImage[0].url
-    : null;
+  const coverUrl =
+    blog.coverImage?.[0]?.url
+      ? blog.coverImage[0].url
+      : null;
 
   return (
     <div className="min-h-screen bg-black">
@@ -36,19 +36,26 @@ const BlogDetail = () => {
         <p className="mt-4 text-gray-300">{blog.description}</p>
 
         <div className="mt-6 prose prose-invert max-w-none">
+
+
           <ReactMarkdown
             components={{
               img: ({ src, alt }) => {
-                // Fix URLs inside markdown
-                const finalSrc = src.startsWith("http")
-                  ? src
-                  : `${BASE_MEDIA_URL}${src}`;
+                // Replace local localhost URLs with Strapi Cloud URL
+                let finalSrc = src;
+                if (src.startsWith("http://localhost:1337/uploads/")) {
+                  const fileName = src.split("/").pop(); // get the file name
+                  finalSrc = `https://jubilant-respect-a8c8f10627.media.strapiapp.com/${fileName}`;
+                }
                 return <img src={finalSrc} alt={alt} className="w-full rounded-lg my-4" />;
               },
             }}
           >
             {blog.content}
           </ReactMarkdown>
+
+
+
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ const BlogDetail = () => {
   const [blog, setBlog] = useState(null);
 
   const BASE_API_URL = "https://jubilant-respect-a8c8f10627.strapiapp.com";
-  const BASE_MEDIA_URL = "https://jubilant-respect-a8c8f10627.media.strapiapp.com";
 
   useEffect(() => {
     if (!documentId) return;

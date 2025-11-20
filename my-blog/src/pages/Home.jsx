@@ -3,11 +3,13 @@ import BlogSlider from "../components/BlogSlider";
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer'
 
+
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
+  const BASE_URL = "https://jubilant-respect-a8c8f10627.strapiapp.com";
 
   useEffect(() => {
-    fetch("http://localhost:1337/api/blogs?populate=*")
+    fetch(`${BASE_URL}/api/blogs?populate=*`)
       .then((res) => res.json())
       .then((data) => setBlogs(data.data)); // <- your blogs array
   }, []);
